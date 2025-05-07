@@ -41,7 +41,7 @@ export default function Contact() {
 
     try {
       const response = await fetch(
-        "https://emal-sender-backend.vercel.app/contact",
+        "https://email-sender-sk.vercel.app/contact",
         {
           method: "POST",
           headers: {

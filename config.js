@@ -1,7 +1,8 @@
 const config = {
   name: "Shamoil Khan",
   title: "MERN Stack Developer",
-  description: "I create full-stack applications with performance and scalability.",
+  description:
+    "I create full-stack applications with performance and scalability.",
   profileImage: "/images/profile.jpg",
 
   // Hero section typing animation roles
@@ -15,18 +16,34 @@ const config = {
   ],
 
   socialLinks: {
-    github: "https://github.com/username",
-    linkedin: "https://linkedin.com/in/username",
+    github: "https://github.com/shamoil-khan",
+    linkedin: "https://www.linkedin.com/in/shamoil-khan-72a748349/",
     twitter: "https://twitter.com/username",
-    website: "https://yourdomain.com",
+    website: "https://shamoil-khan.vercel.app",
   },
 
   // Updated services with Lucide icon names instead of emojis
   services: [
-    { title: "Web Development", icon: "Monitor", description: "Building responsive and dynamic websites" },
-    { title: "API Integration", icon: "Link", description: "Integrating third-party services and APIs" },
-    { title: "UI/UX Design", icon: "Palette", description: "Creating beautiful and intuitive user interfaces" },
-    { title: "Mobile Development", icon: "Smartphone", description: "Building cross-platform mobile applications" },
+    {
+      title: "Web Development",
+      icon: "Monitor",
+      description: "Building responsive and dynamic websites",
+    },
+    {
+      title: "API Integration",
+      icon: "Link",
+      description: "Integrating third-party services and APIs",
+    },
+    {
+      title: "UI/UX Design",
+      icon: "Palette",
+      description: "Creating beautiful and intuitive user interfaces",
+    },
+    {
+      title: "Mobile Development",
+      icon: "Smartphone",
+      description: "Building cross-platform mobile applications",
+    },
   ],
 
   education: [
@@ -75,7 +92,7 @@ const config = {
       disabled: false,
       completed: true,
       badge: "Completed",
-      tags: ["React", "Firebase", "Authentication", "Firestore"],
+      tags: ["JavaScript", "Firebase", "Authentication", "Firestore"],
     },
     {
       img: "./philPallen.png",
@@ -86,7 +103,7 @@ const config = {
       disabled: false,
       completed: true,
       badge: "Completed",
-      tags: ["HTML", "CSS", "JavaScript", "Responsive Design"],
+      tags: ["HTML", "CSS", "Clone", "Responsive Design"],
     },
     {
       img: "./notes.png",
@@ -156,14 +173,15 @@ const config = {
     },
   ],
 
-  contactEmail: "your@email.com",
+  contactEmail: "shamoilkhan210@email.com",
 
   meta: {
     title: "Shamoil | MERN Developer Portfolio",
     description: "Personal portfolio site of a MERN Stack Developer.",
     keywords: "MERN, Developer, Portfolio, JavaScript, Next.js",
     ogImage: "/images/og.png",
+    icon: "/icon.png",
   },
-}
+};
 
-export default config
+export default config;
