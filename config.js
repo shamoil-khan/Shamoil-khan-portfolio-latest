@@ -176,10 +176,14 @@ const config = {
   contactEmail: "shamoilkhan210@email.com",
 
   meta: {
-    title: "Shamoil | MERN Developer Portfolio",
-    description: "Personal portfolio site of a MERN Stack Developer.",
-    keywords: "MERN, Developer, Portfolio, JavaScript, Next.js",
+    title: "Shamoil Khan | MERN Developer Portfolio",
+    description:
+      "Personal portfolio of Shamoil Khan, a MERN Stack Developer specializing in creating full-stack applications with performance and scalability.",
+    keywords:
+      "MERN, Developer, Portfolio, JavaScript, React, Node.js, MongoDB, Express, Next.js, Web Development",
     ogImage: "/images/og.png",
+    siteUrl: "https://your-portfolio-url.com", // Replace with your actual domain
+    twitterHandle: "@yourusername", // Replace with your Twitter handle
     icon: "/icon.png",
   },
 };
