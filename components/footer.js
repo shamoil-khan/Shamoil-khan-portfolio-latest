@@ -1,15 +1,23 @@
-"use client"
-import Link from "next/link"
-import { motion } from "framer-motion"
-import { Github, Linkedin, Mail, ExternalLink, ChevronRight, Heart, Code } from "lucide-react"
-import config from "@/config"
+"use client";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import {
+  Github,
+  Linkedin,
+  Mail,
+  ExternalLink,
+  ChevronRight,
+  Heart,
+  Code,
+} from "lucide-react";
+import config from "@/config";
 
 export default function Footer({ scrollToSection }) {
   // const [emailInput, setEmailInput] = useState("")
   // const [isSubmitting, setIsSubmitting] = useState(false)
   // const [subscribed, setSubscribed] = useState(false)
 
-  const year = new Date().getFullYear()
+  const year = new Date().getFullYear();
 
   // const handleSubscribe = (e) => {
   //   e.preventDefault()
@@ -35,14 +43,30 @@ export default function Footer({ scrollToSection }) {
     { name: "Projects", id: "projects" },
     { name: "Education", id: "education" },
     { name: "Contact", id: "contact" },
-  ]
+  ];
 
   const socialLinks = [
-    { name: "GitHub", icon: <Github className="h-5 w-5" />, url: config.socialLinks.github },
-    { name: "LinkedIn", icon: <Linkedin className="h-5 w-5" />, url: config.socialLinks.linkedin },
-    { name: "Email", icon: <Mail className="h-5 w-5" />, url: `mailto:${config.contactEmail}` },
-    { name: "Website", icon: <ExternalLink className="h-5 w-5" />, url: config.socialLinks.website },
-  ]
+    {
+      name: "GitHub",
+      icon: <Github className="h-5 w-5" />,
+      url: config.socialLinks.github,
+    },
+    {
+      name: "LinkedIn",
+      icon: <Linkedin className="h-5 w-5" />,
+      url: config.socialLinks.linkedin,
+    },
+    {
+      name: "Email",
+      icon: <Mail className="h-5 w-5" />,
+      url: `mailto:${config.contactEmail}`,
+    },
+    {
+      name: "Website",
+      icon: <ExternalLink className="h-5 w-5" />,
+      url: config.socialLinks.website,
+    },
+  ];
 
   return (
     <footer className="border-t border-border bg-gradient-to-b from-muted/30 to-background">
@@ -149,7 +173,9 @@ export default function Footer({ scrollToSection }) {
                     rel="noopener noreferrer"
                     className="inline-flex items-center text-muted-foreground hover:text-primary transition-colors"
                   >
-                    <span className="bg-muted/50 p-2 rounded-md mr-3 text-primary">{link.icon}</span>
+                    <span className="bg-muted/50 p-2 rounded-md mr-3 text-primary">
+                      {link.icon}
+                    </span>
                     {link.name}
                   </Link>
                 </li>
@@ -258,15 +284,9 @@ export default function Footer({ scrollToSection }) {
             <div className="text-muted-foreground text-sm mb-4 md:mb-0">
               © {year} | {config.name} | All Rights Reserved
             </div>
-
-            <div className="flex items-center text-sm text-muted-foreground">
-              <span>Made with</span>
-              <Heart className="h-3 w-3 mx-1 text-red-500" />
-              <span>using Next.js and Tailwind CSS</span>
-            </div>
           </div>
         </div>
       </div>
     </footer>
-  )
+  );
 }

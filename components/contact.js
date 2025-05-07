@@ -1,43 +1,63 @@
-"use client"
+"use client";
 
-import { useRef, useState } from "react"
-import { motion, useInView } from "framer-motion"
-import { Send } from "lucide-react"
-import toast from "react-hot-toast"
-import { useTheme } from "next-themes"
+import { useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
+import { Send } from "lucide-react";
+import toast from "react-hot-toast";
+import { useTheme } from "next-themes";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
-  })
-  const [isSending, setIsSending] = useState(false)
-  const { resolvedTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.2 })
+  });
+  const [isSending, setIsSending] = useState(false);
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  const formRef = useRef(null);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.2 });
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
-  }
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const resetForm = () => {
+    setFormData({
+      name: "",
+      email: "",
+      message: "",
+    });
+    // If we have a form reference, reset the form element as well
+    if (formRef.current) {
+      formRef.current.reset();
+    }
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setIsSending(true)
+    e.preventDefault();
+    setIsSending(true);
 
     try {
-      const response = await fetch("https://shamoil-khan-portfolio-backend-server.vercel.app/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      })
+      const response = await fetch(
+        "https://emal-sender-backend.vercel.app/contact",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            message: formData.message,
+          }),
+        }
+      );
 
-      if (!response.ok) throw new Error("Network response was not ok")
+      if (!response.ok) throw new Error("Network response was not ok");
 
-      await response.text()
+      await response.text();
 
       toast.success("Message sent successfully!", {
         style: {
@@ -45,9 +65,10 @@ export default function Contact() {
           color: resolvedTheme === "dark" ? "#fff" : "#333",
         },
         duration: 3000,
-      })
+      });
 
-      setFormData({ name: "", email: "", message: "" })
+      // Reset form after successful submission
+      resetForm();
     } catch (error) {
       toast.error("Message failed to send.", {
         style: {
@@ -55,11 +76,11 @@ export default function Contact() {
           color: resolvedTheme === "dark" ? "#fff" : "#333",
         },
         duration: 3000,
-      })
+      });
     } finally {
-      setIsSending(false)
+      setIsSending(false);
     }
-  }
+  };
 
   const containerVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -68,7 +89,7 @@ export default function Contact() {
       y: 0,
       transition: { duration: 0.5 },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 10 },
@@ -77,10 +98,13 @@ export default function Contact() {
       y: 0,
       transition: { duration: 0.3 },
     },
-  }
+  };
 
   return (
-    <section id="contact" className="section-padding bg-gradient-to-b from-background to-muted/30">
+    <section
+      id="contact"
+      className="section-padding bg-gradient-to-b from-background to-muted/30"
+    >
       <div className="container mx-auto container-padding">
         <div className="text-center mb-12">
           <motion.span
@@ -115,7 +139,8 @@ export default function Contact() {
             transition={{ duration: 0.5, delay: 0.3 }}
             viewport={{ once: true }}
           >
-            Have a project in mind or want to collaborate? Feel free to reach out!
+            Have a project in mind or want to collaborate? Feel free to reach
+            out!
           </motion.p>
         </div>
 
@@ -126,7 +151,13 @@ export default function Contact() {
           animate={isInView ? "visible" : "hidden"}
           className="max-w-2xl mx-auto"
         >
-          <form onSubmit={handleSubmit} className="space-y-6 bg-card p-8 rounded-lg shadow-lg border border-border">
+          <form
+            ref={formRef}
+            onSubmit={handleSubmit}
+            className={`space-y-6 bg-card p-8 rounded-lg shadow-lg border border-border ${
+              isSending ? "opacity-80" : ""
+            }`}
+          >
             <motion.div variants={itemVariants}>
               <label htmlFor="name" className="block text-sm font-medium mb-2">
                 Name
@@ -138,8 +169,11 @@ export default function Contact() {
                 value={formData.name}
                 onChange={handleChange}
                 required
+                disabled={isSending}
                 placeholder="Your name"
-                className="w-full p-3 rounded-md bg-background border border-border focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200"
+                className={`w-full p-3 rounded-md bg-background border border-border focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 ${
+                  isSending ? "cursor-not-allowed opacity-70" : ""
+                }`}
               />
             </motion.div>
 
@@ -154,13 +188,19 @@ export default function Contact() {
                 value={formData.email}
                 onChange={handleChange}
                 required
+                disabled={isSending}
                 placeholder="your.email@example.com"
-                className="w-full p-3 rounded-md bg-background border border-border focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200"
+                className={`w-full p-3 rounded-md bg-background border border-border focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 ${
+                  isSending ? "cursor-not-allowed opacity-70" : ""
+                }`}
               />
             </motion.div>
 
             <motion.div variants={itemVariants}>
-              <label htmlFor="message" className="block text-sm font-medium mb-2">
+              <label
+                htmlFor="message"
+                className="block text-sm font-medium mb-2"
+              >
                 Message
               </label>
               <textarea
@@ -169,9 +209,12 @@ export default function Contact() {
                 value={formData.message}
                 onChange={handleChange}
                 required
+                disabled={isSending}
                 placeholder="Your message"
                 rows={5}
-                className="w-full p-3 rounded-md bg-background border border-border focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 resize-none"
+                className={`w-full p-3 rounded-md bg-background border border-border focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 resize-none ${
+                  isSending ? "cursor-not-allowed opacity-70" : ""
+                }`}
               />
             </motion.div>
 
@@ -180,7 +223,9 @@ export default function Contact() {
                 type="submit"
                 disabled={isSending}
                 className={`w-full py-3 px-4 flex items-center justify-center rounded-md text-white font-medium transition-all duration-300 ${
-                  isSending ? "bg-primary/70 cursor-not-allowed" : "bg-primary hover:bg-primary/90 hover:shadow-md"
+                  isSending
+                    ? "bg-primary/70 cursor-not-allowed"
+                    : "bg-primary hover:bg-primary/90 hover:shadow-md"
                 }`}
               >
                 {isSending ? (
@@ -219,5 +264,5 @@ export default function Contact() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { ArrowRight } from "lucide-react"
-import { TypeAnimation } from "react-type-animation"
-import config from "@/config"
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
+import { TypeAnimation } from "react-type-animation";
+import config from "@/config";
 
 export default function Hero({ scrollToSection }) {
   // Text animation variants
@@ -17,7 +17,7 @@ export default function Hero({ scrollToSection }) {
         delayChildren: 0.3,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -26,25 +26,28 @@ export default function Hero({ scrollToSection }) {
       y: 0,
       transition: { duration: 0.6, ease: "easeOut" },
     },
-  }
+  };
 
   // Create the sequence for typing animation
-  const typeAnimationSequence = []
+  const typeAnimationSequence = [];
 
   // Build the sequence with each role followed by a pause
   config.heroRoles.forEach((role, index) => {
-    typeAnimationSequence.push(role) // Add the role text
-    typeAnimationSequence.push(1500) // Pause for 1.5 seconds
+    typeAnimationSequence.push(role); // Add the role text
+    typeAnimationSequence.push(1500); // Pause for 1.5 seconds
 
     // Don't add delete animation for the last item
     if (index !== config.heroRoles.length - 1) {
-      typeAnimationSequence.push("") // Delete the text
-      typeAnimationSequence.push(500) // Pause for 0.5 seconds before next role
+      typeAnimationSequence.push(""); // Delete the text
+      typeAnimationSequence.push(500); // Pause for 0.5 seconds before next role
     }
-  })
+  });
 
   return (
-    <section id="home" className="min-h-[90vh] flex items-center justify-center relative overflow-hidden">
+    <section
+      id="home"
+      className="min-h-[90vh] flex items-center justify-center relative overflow-hidden"
+    >
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-background z-0"></div>
 
@@ -90,7 +93,10 @@ export default function Hero({ scrollToSection }) {
             Welcome to my portfolio
           </motion.span>
 
-          <motion.h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight" variants={itemVariants}>
+          <motion.h1
+            className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
+            variants={itemVariants}
+          >
             Hi, I'm <span className="text-primary">{config.name}</span>
           </motion.h1>
 
@@ -108,15 +114,21 @@ export default function Hero({ scrollToSection }) {
             />
           </motion.div>
 
-          <motion.p className="text-lg mb-8 max-w-lg text-center text-muted-foreground" variants={itemVariants}>
+          <motion.p
+            className="text-lg mb-8 max-w-lg text-center text-muted-foreground"
+            variants={itemVariants}
+          >
             {config.description}
           </motion.p>
 
-          <motion.div className="flex flex-wrap gap-6 md:gap-8 justify-center w-full" variants={itemVariants}>
+          <motion.div
+            className="flex flex-wrap gap-6 md:gap-8 justify-center w-full"
+            variants={itemVariants}
+          >
             <Button
               size="lg"
               onClick={() => scrollToSection("projects")}
-              className="group py-2 px-6 min-w-[160px] inline-flex items-center justify-center rounded-md bg-primary text-primary-foreground shadow hover:bg-primary/90"
+              className="group py-3 px-6 min-w-[160px] inline-flex items-center justify-center rounded-md bg-primary text-primary-foreground shadow hover:bg-primary/90"
             >
               View Projects
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -125,7 +137,7 @@ export default function Hero({ scrollToSection }) {
               variant="outline"
               size="lg"
               onClick={() => scrollToSection("contact")}
-              className="py-2 px-6 min-w-[160px] inline-flex items-center justify-center rounded-md border border-input bg-background hover:bg-accent hover:text-accent-foreground"
+              className="py-3 px-6 min-w-[160px] inline-flex items-center justify-center rounded-md border border-input bg-background hover:bg-accent hover:text-accent-foreground"
             >
               Contact Me
             </Button>
@@ -148,5 +160,5 @@ export default function Hero({ scrollToSection }) {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

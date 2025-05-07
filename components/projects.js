@@ -1,13 +1,19 @@
-"use client"
+"use client";
 
-import { useRef, useState } from "react"
-import Link from "next/link"
-import Image from "next/image"
-import { motion, useInView, AnimatePresence } from "framer-motion"
-import { Github, ExternalLink, ChevronDown, ChevronUp, Lock } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import config from "@/config"
+import { useRef, useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { motion, useInView, AnimatePresence } from "framer-motion";
+import {
+  Github,
+  ExternalLink,
+  ChevronDown,
+  ChevronUp,
+  Lock,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import config from "@/config";
 import {
   Code,
   Server,
@@ -27,7 +33,7 @@ import {
   Sparkles,
   HardDrive,
   Key,
-} from "lucide-react"
+} from "lucide-react";
 
 // Technology icons mapping
 // Replace the techIcons mapping with proper Lucide components
@@ -56,22 +62,24 @@ const techIcons = {
   "Local Storage": <HardDrive className="h-3 w-3" />,
   Firestore: <Flame className="h-3 w-3" />,
   "Unsplash API": <Globe className="h-3 w-3" />,
-}
+};
 
 export default function Projects() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.1 })
-  const [showAll, setShowAll] = useState(false)
-  const [hoveredIndex, setHoveredIndex] = useState(null)
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
+  const [showAll, setShowAll] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
 
   // Initial number of projects to display
-  const initialProjectCount = 4
+  const initialProjectCount = 4;
 
   // Get all projects from config file
-  const allProjects = config.projectsData
+  const allProjects = config.projectsData;
 
   // Show only initial count or all projects based on state
-  const visibleProjects = showAll ? allProjects : allProjects.slice(0, initialProjectCount)
+  const visibleProjects = showAll
+    ? allProjects
+    : allProjects.slice(0, initialProjectCount);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -81,7 +89,7 @@ export default function Projects() {
         staggerChildren: 0.2,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 30 },
@@ -90,36 +98,39 @@ export default function Projects() {
       y: 0,
       transition: { duration: 0.6 },
     },
-  }
+  };
 
   const toggleShowAll = () => {
-    setShowAll(!showAll)
+    setShowAll(!showAll);
 
     // Scroll back to projects section if collapsing
     if (showAll) {
-      const projectsSection = document.getElementById("projects")
+      const projectsSection = document.getElementById("projects");
       if (projectsSection) {
-        projectsSection.scrollIntoView({ behavior: "smooth" })
+        projectsSection.scrollIntoView({ behavior: "smooth" });
       }
     }
-  }
+  };
 
   // Badge color mapping
   const getBadgeColor = (badgeText) => {
     switch (badgeText) {
       case "Completed":
-        return "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400"
+        return "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400";
       case "In Development":
-        return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400"
+        return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400";
       case "Pending":
-        return "bg-gray-100 text-gray-800 dark:bg-gray-800/50 dark:text-gray-400"
+        return "bg-gray-100 text-gray-800 dark:bg-gray-800/50 dark:text-gray-400";
       default:
-        return "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400"
+        return "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400";
     }
-  }
+  };
 
   return (
-    <section id="projects" className="section-padding bg-gradient-to-b from-background to-muted/30">
+    <section
+      id="projects"
+      className="section-padding bg-gradient-to-b from-background to-muted/30"
+    >
       <div className="container mx-auto container-padding">
         <div className="text-center mb-16">
           <motion.span
@@ -170,8 +181,16 @@ export default function Projects() {
               <motion.div
                 key={index}
                 variants={itemVariants}
-                initial={showAll && index >= initialProjectCount ? { opacity: 0, y: 20 } : undefined}
-                animate={showAll && index >= initialProjectCount ? { opacity: 1, y: 0 } : undefined}
+                initial={
+                  showAll && index >= initialProjectCount
+                    ? { opacity: 0, y: 20 }
+                    : undefined
+                }
+                animate={
+                  showAll && index >= initialProjectCount
+                    ? { opacity: 1, y: 0 }
+                    : undefined
+                }
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.5 }}
                 className="group"
@@ -184,7 +203,9 @@ export default function Projects() {
                   {/* Status Badge */}
                   <div className="absolute top-3 right-3 z-10">
                     <span
-                      className={`px-2 py-1 rounded-full text-xs font-medium flex items-center gap-1 ${getBadgeColor(project.badge)}`}
+                      className={`px-2 py-1 rounded-full text-xs font-medium flex items-center gap-1 ${getBadgeColor(
+                        project.badge
+                      )}`}
                     >
                       {project.badge === "Completed" ? (
                         <CheckCircle className="h-3 w-3" />
@@ -198,9 +219,14 @@ export default function Projects() {
                   </div>
 
                   {/* Project Image - With 16:9 aspect ratio */}
-                  <div className="relative w-full overflow-hidden rounded-lg mb-4" style={{ aspectRatio: "16/9" }}>
+                  <div
+                    className="relative w-full overflow-hidden rounded-lg mb-4"
+                    style={{ aspectRatio: "16/9" }}
+                  >
                     <Image
-                      src={project.img || "/placeholder.svg?height=160&width=320"}
+                      src={
+                        project.img || "/placeholder.svg?height=160&width=320"
+                      }
                       alt={project.title}
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
@@ -215,7 +241,9 @@ export default function Projects() {
                     <h3 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors">
                       {project.title}
                     </h3>
-                    <p className="text-muted-foreground text-sm mb-4 flex-grow line-clamp-3">{project.desc}</p>
+                    <p className="text-muted-foreground text-sm mb-4 flex-grow line-clamp-3">
+                      {project.desc}
+                    </p>
 
                     {/* Tech Stack with Icons - Using tags from data */}
                     <div className="flex flex-wrap gap-2 mb-4">
@@ -234,27 +262,55 @@ export default function Projects() {
                     <div className="flex justify-between items-center gap-2 pt-2 border-t border-border/50">
                       {/* GitHub button styled as standard button */}
                       {project.disabled ? (
-                        <Button variant="outline" size="sm" className="w-full" disabled>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="w-full"
+                          disabled
+                        >
                           <Lock className="h-4 w-4 mr-1" />
                           Private
                         </Button>
                       ) : project.github ? (
-                        <Button variant="outline" size="sm" className="w-full" asChild>
-                          <Link href={project.github} target="_blank" rel="noopener noreferrer">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="w-full"
+                          asChild
+                        >
+                          <Link
+                            href={project.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
                             <Github className="h-4 w-4 mr-1" />
                             Code
                           </Link>
                         </Button>
                       ) : (
-                        <Button variant="outline" size="sm" className="w-full" disabled>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="w-full"
+                          disabled
+                        >
                           <Lock className="h-4 w-4 mr-1" />
                           Private
                         </Button>
                       )}
 
                       {/* Live Demo button styled as standard button */}
-                      <Button variant="default" size="sm" className="w-full" asChild>
-                        <Link href={project.url} target="_blank" rel="noopener noreferrer">
+                      <Button
+                        variant="default"
+                        size="sm"
+                        className="w-full"
+                        asChild
+                      >
+                        <Link
+                          href={project.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
                           <ExternalLink className="h-4 w-4 mr-1" />
                           Live Demo
                         </Link>
@@ -279,7 +335,7 @@ export default function Projects() {
               onClick={toggleShowAll}
               variant="outline"
               size="lg"
-              className="group border-primary/20 hover:border-primary py-2 px-6 min-w-[180px] inline-flex items-center justify-center rounded-md border border-input bg-background hover:bg-accent hover:text-accent-foreground"
+              className="group border-primary/20 hover:border-primary py-3 px-6 min-w-[180px] inline-flex items-center justify-center rounded-md border bg-background hover:bg-accent hover:text-accent-foreground"
             >
               {showAll ? (
                 <>
@@ -297,5 +353,5 @@ export default function Projects() {
         )}
       </div>
     </section>
-  )
+  );
 }
