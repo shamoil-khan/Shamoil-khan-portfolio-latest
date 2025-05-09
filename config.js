@@ -178,12 +178,12 @@ const config = {
   meta: {
     title: "Shamoil Khan | MERN Developer Portfolio",
     description:
-      "Personal portfolio of Shamoil Khan, a MERN Stack Developer specializing in creating full-stack applications with performance and scalability.",
+      "Shamoil Khan's MERN Stack Developer Portfolio. Expert in JavaScript, React, Node.js, Express, MongoDB, and Next.js. Discover modern web development projects.",
     keywords:
-      "MERN, Developer, Portfolio, JavaScript, React, Node.js, MongoDB, Express, Next.js, Web Development",
+      "Shamoil Khan, MERN, Developer, Portfolio, JavaScript, React, Node.js, MongoDB, Express, Next.js, Web Development",
     ogImage: "/images/og.png",
-    siteUrl: "https://your-portfolio-url.com", // Replace with your actual domain
-    twitterHandle: "@yourusername", // Replace with your Twitter handle
+    siteUrl: "https://shamoil-khan.vercel.app", // Replace with your actual domain
+    twitterHandle: "", // Replace with your Twitter handle
     icon: "/icon.png",
   },
 };
