@@ -96,7 +96,7 @@ export default function RootLayout({ children }) {
     potentialAction: {
       "@type": "SearchAction",
       target: `${
-        config.meta.siteUrl || "https://your-portfolio-url.com"
+        config.meta.siteUrl || "https://shamoil-khan.vercel.app"
       }/search?q={search_term_string}`,
       "query-input": "required name=search_term_string",
     },
